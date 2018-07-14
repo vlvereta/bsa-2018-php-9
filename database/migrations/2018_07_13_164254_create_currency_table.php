@@ -19,7 +19,6 @@ class CreateCurrencyTable extends Migration
             $table->string('short_name');
             $table->string('logo_url');
             $table->unsignedDecimal('price');
-            $table->timestamps();
         });
     }
 

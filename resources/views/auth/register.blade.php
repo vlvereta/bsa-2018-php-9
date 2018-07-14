@@ -66,7 +66,10 @@
                                 <button type="submit" class="btn btn-primary">
                                     {{ __('Register') }}
                                 </button>
-                                <a class="btn btn-link" href="{{ url('/auth/facebook') }}">Facebook</a>
+
+                                {{-- Github auth reference --}}
+                                <a class="btn btn-link" href="{{ url('auth/github') }}">Github</a>
+
                             </div>
                         </div>
                     </form>

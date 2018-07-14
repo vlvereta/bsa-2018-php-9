@@ -36,7 +36,7 @@ class Task1AuthorizationTest extends DuskTestCase
             function (Browser $browser) {
                 $user = TestDataFactory::createUser();
 
-                TestDataFactory::createCurrency();
+//                TestDataFactory::createCurrency();
 
                 $browser->loginAs($user)
                     ->visit('/currencies')

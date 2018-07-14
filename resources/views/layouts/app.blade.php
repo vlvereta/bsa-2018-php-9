@@ -39,9 +39,11 @@
                             <a class="nav-link" href="{{ route('index') }}">Currencies</a>
                         </li>
                         @auth
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('create') }}">Add</a>
-                        </li>
+                            @can('create')
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('create') }}">Add</a>
+                                </li>
+                            @endcan
                         @endauth
                     </ul>
 

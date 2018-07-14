@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-{{--@section('title', $currency['title'])--}}
+@section('title', $currency['title'])
 
 @section('content')
 
@@ -10,6 +10,7 @@
         <h4>{{ $currency['title'] }}</h4>
         <h4>{{ $currency['short_name'] }}</h4>
         <h4>{{ $currency['price'] }}</h4>
+        @can('edit')
         <div class="row">
             <div class="col-md-6 text-right">
                 <a class="btn btn-warning edit-button" href="{{ route('edit', ['id' => $currency['id']]) }}" role="button">Edit</a>
@@ -22,6 +23,7 @@
                 </form>
             </div>
         </div>
+        @endcan
     </div>
 
 @endsection

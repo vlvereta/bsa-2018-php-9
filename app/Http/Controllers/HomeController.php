@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use Gate;
 use App\Currency;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Redirect;
+use App\Http\Requests\ValidatedCurrencyRequest;
 
 class HomeController extends Controller
 {
@@ -35,12 +35,19 @@ class HomeController extends Controller
      */
     public function create()
     {
+        if (Gate::denies('create')) {
+            return redirect('/');
+        }
         return view('forms/currency-create');
     }
 
-    public function store(ValidatedCurrencyRequest &$request)
+    public function store(ValidatedCurrencyRequest $request)
     {
-//
+        if (Gate::denies('create')) {
+            return redirect('/');
+        }
+        Currency::create($request->only(['title', 'short_name', 'logo_url', 'price']));
+        return redirect()->route('index');
     }
 
     /**
@@ -63,12 +70,22 @@ class HomeController extends Controller
      */
     public function edit(int $id)
     {
-        return view('forms/currency-edit', ['id' => $id]);
+        if (Gate::denies('edit')) {
+            return redirect('/');
+        }
+        return view('forms/currency-edit', ['currency' => Currency::find($id)]);
     }
 
-    public function update(ValidatedCurrencyRequest &$request)
+    public function update(ValidatedCurrencyRequest $request)
     {
-//
+        if (Gate::denies('edit')) {
+            return redirect('/');
+        } else if ($currency = Currency::find($request->id)) {
+            $currency->update($request->only(['title', 'short_name', 'logo_url', 'price']));
+            return redirect()->route('show', $request->id);
+        } else {
+            abort(404);
+        }
     }
 
     /**
@@ -79,7 +96,10 @@ class HomeController extends Controller
      */
     public function destroy(int $id)
     {
+        if (Gate::denies('delete')) {
+            return redirect('/');
+        }
         Currency::destroy($id);
-        return view('currencies', ['currencies' => Currency::all()]);
+        return redirect()->route('index');
     }
 }

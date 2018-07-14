@@ -2,7 +2,8 @@
 
 namespace App\Providers;
 
-use Illuminate\Support\Facades\Gate;
+use Gate;
+use App\User;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
 class AuthServiceProvider extends ServiceProvider
@@ -14,6 +15,7 @@ class AuthServiceProvider extends ServiceProvider
      */
     protected $policies = [
         'App\Model' => 'App\Policies\ModelPolicy',
+        'App\Currency' => 'App\Policies\CurrencyPolicy',
     ];
 
     /**
@@ -25,6 +27,16 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        //
+        /**
+         * For comf. admin authorization in ValidatedCurrencyRequest 'cause
+         * we need ability to edit and create.
+         */
+        Gate::define('admin', function (User $user) {
+            return $user->getAttribute('is_admin');
+        });
+
+        Gate::define('create', 'App\Policies\CurrencyPolicy@update');
+        Gate::define('edit', 'App\Policies\CurrencyPolicy@update');
+        Gate::define('delete', 'App\Policies\CurrencyPolicy@update');
     }
 }

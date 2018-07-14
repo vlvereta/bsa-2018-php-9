@@ -1,67 +1,80 @@
 @extends('layouts.app')
 
-@section('title', 'Edit')
+@section('title', 'Edit currency')
 
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header">{{ __('Login') }}</div>
+                    <div class="card-header">{{ __('Editing currency in the market') }}</div>
 
                     <div class="card-body">
-                        <form method="POST" action="{{ route('login') }}" aria-label="{{ __('Login') }}">
-                            @csrf
+                        <form method="POST" action="{{ route('update', $currency['id']) }}">
+                            {{ method_field('PUT') }}
+                            {{ csrf_field() }}
 
                             <div class="form-group row">
-                                <label for="email" class="col-sm-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
+                                <label for="title" class="col-sm-4 col-form-label text-md-right">{{ __('Currency name:') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required autofocus>
+                                    <input id="title" type="title" class="form-control{{ $errors->has('title') ? ' is-invalid' : '' }}" name="title" value="{{ old('title') ? old('title') : $currency['title'] }}" required autofocus>
 
-                                    @if ($errors->has('email'))
+                                    @if ($errors->has('title'))
                                         <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('email') }}</strong>
+                                        <strong>{{ $errors->first('title') }}</strong>
                                     </span>
                                     @endif
                                 </div>
                             </div>
 
                             <div class="form-group row">
-                                <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
+                                <label for="short_name" class="col-sm-4 col-form-label text-md-right">{{ __('Short name:') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" required>
+                                    <input id="short_name" type="short_name" class="form-control{{ $errors->has('short_name') ? ' is-invalid' : '' }}" name="short_name" value="{{ old('short_name') ? old('short_name') : $currency['short_name'] }}" required autofocus>
 
-                                    @if ($errors->has('password'))
+                                    @if ($errors->has('short_name'))
                                         <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('password') }}</strong>
+                                        <strong>{{ $errors->first('short_name') }}</strong>
                                     </span>
                                     @endif
                                 </div>
                             </div>
 
                             <div class="form-group row">
-                                <div class="col-md-6 offset-md-4">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
+                                <label for="logo_url" class="col-sm-4 col-form-label text-md-right">{{ __('Logo URL:') }}</label>
 
-                                        <label class="form-check-label" for="remember">
-                                            {{ __('Remember Me') }}
-                                        </label>
-                                    </div>
+                                <div class="col-md-6">
+                                    <input id="logo_url" type="logo_url" class="form-control{{ $errors->has('logo_url') ? ' is-invalid' : '' }}" name="logo_url" value="{{ old('logo_url') ? old('logo_url') : $currency['logo_url'] }}" required autofocus>
+
+                                    @if ($errors->has('logo_url'))
+                                        <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('logo_url') }}</strong>
+                                    </span>
+                                    @endif
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="price" class="col-sm-4 col-form-label text-md-right">{{ __('Price:') }}</label>
+
+                                <div class="col-md-6">
+                                    <input id="price" type="price" class="form-control{{ $errors->has('price') ? ' is-invalid' : '' }}" name="price" value="{{ old('price') ? old('price') : $currency['price'] }}" required autofocus>
+
+                                    @if ($errors->has('price'))
+                                        <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('price') }}</strong>
+                                    </span>
+                                    @endif
                                 </div>
                             </div>
 
                             <div class="form-group row mb-0">
                                 <div class="col-md-8 offset-md-4">
                                     <button type="submit" class="btn btn-primary">
-                                        {{ __('Login') }}
+                                        {{ __('Save') }}
                                     </button>
-
-                                    <a class="btn btn-link" href="{{ route('password.request') }}">
-                                        {{ __('Forgot Your Password?') }}
-                                    </a>
                                 </div>
                             </div>
                         </form>

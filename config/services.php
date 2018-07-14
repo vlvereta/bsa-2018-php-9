@@ -35,10 +35,10 @@ return [
         'secret' => env('STRIPE_SECRET'),
     ],
 
-    'facebook' => [
-        'client_id'     => env('FB_ID'),
-        'client_secret' => env('FB_SECRET'),
-        'redirect'      => env('FB_URL'),
+    'github' => [
+        'client_id'     => env('GH_ID'),
+        'client_secret' => env('GH_SECRET'),
+        'redirect'      => env('GH_URL'),
     ],
 
 ];

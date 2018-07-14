@@ -29,9 +29,10 @@ Route::get('/currencies/{id}', 'HomeController@show')->name('show');
 
 Route::get('/currencies/{id}/edit', 'HomeController@edit')->name('edit');
 
-Route::match(['put', 'patch'], '/currencies/{id]', 'HomeController@update')->name('update');
+Route::match(['put', 'patch'], '/currencies/{id}', 'HomeController@update')->name('update');
 
 Route::delete('/currencies/{id}', 'HomeController@destroy')->name('destroy');
+
 
 // OAuth routes
 
