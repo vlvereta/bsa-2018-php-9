@@ -58,10 +58,13 @@
                                 </button>
 
                                 {{-- Github auth reference --}}
+                                <a class="btn btn-link" href="{{ url('auth/facebook') }}">Facebook</a>
+
+                                {{-- Github auth reference --}}
                                 <a class="btn btn-link" href="{{ url('auth/github') }}">Github</a>
 
                                 <a class="btn btn-link" href="{{ route('password.request') }}">
-                                    {{ __('Forgot Your Password?') }}
+                                    {{ __('Forgot?') }}
                                 </a>
                             </div>
                         </div>
